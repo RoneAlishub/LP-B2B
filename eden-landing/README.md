@@ -1,2 +1,2 @@
-# eden-landing
+# eden-lp-b2b
 

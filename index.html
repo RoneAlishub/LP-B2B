@@ -920,6 +920,12 @@
 
   <!-- JS -->
   <script>
+    // ── Scroll fix: always start at top ──
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     const nav = document.getElementById('nav');
     addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60), {passive:true});
 

@@ -11,36 +11,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    /* ─────────────────────────────────────────
-       TOKENS
-    ───────────────────────────────────────── */
     :root {
       --bg0: #07080D;
       --bg1: #0C0E18;
       --bg2: #111422;
       --bg3: #181C2C;
-
       --gold:       #C89620;
       --gold-hi:    #E8AE28;
       --gold-dim:   rgba(200,150,32,.18);
       --gold-line:  rgba(200,150,32,.22);
-
       --ruby:       #D63030;
       --ruby-dim:   rgba(214,48,48,.12);
-
       --text1: #F2F3F8;
       --text2: #A8B2C0;
       --text3: #5E6878;
-
       --border: rgba(255,255,255,.07);
       --r:  14px;
       --r2: 24px;
       --ease: cubic-bezier(.22,1,.36,1);
     }
 
-    /* ─────────────────────────────────────────
-       RESET
-    ───────────────────────────────────────── */
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
@@ -54,7 +44,6 @@
     a { text-decoration:none; color:inherit; }
     img { display:block; max-width:100%; }
 
-    /* Grain overlay */
     body::before {
       content:'';
       position:fixed; inset:0;
@@ -62,18 +51,12 @@
       opacity:.028; pointer-events:none; z-index:9000;
     }
 
-    /* ─────────────────────────────────────────
-       LAYOUT
-    ───────────────────────────────────────── */
     .wrap {
       max-width:1180px;
       margin:0 auto;
       padding:0 2rem;
     }
 
-    /* ─────────────────────────────────────────
-       REUSABLE COMPONENTS
-    ───────────────────────────────────────── */
     .pill {
       display:inline-flex; align-items:center; gap:.45rem;
       padding:.32rem 1rem;
@@ -97,7 +80,6 @@
 
     .sec-head { margin-bottom:3.5rem; }
 
-    /* Buttons */
     .btn {
       display:inline-flex; align-items:center; gap:.55rem;
       padding:.88rem 1.9rem;
@@ -118,16 +100,13 @@
     }
     .btn-wa:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(37,211,102,.35); }
 
-    /* Fade-in reveal */
     .fi {
       opacity:0; transform:translateY(28px);
       transition:opacity .7s var(--ease), transform .7s var(--ease);
     }
     .fi.on { opacity:1; transform:translateY(0); }
 
-    /* ─────────────────────────────────────────
-       NAV
-    ───────────────────────────────────────── */
+    /* ── NAV ── */
     nav {
       position:fixed; top:0; inset-inline:0; z-index:200;
       padding:1.1rem 3rem;
@@ -143,7 +122,6 @@
     }
     .logo { font-size:1.35rem; font-weight:900; letter-spacing:-.02em; }
     .logo em { color:var(--gold); font-style:normal; }
-
     .nav-links {
       display:flex; align-items:center; gap:2.2rem; list-style:none;
     }
@@ -155,14 +133,10 @@
       transition:all .2s;
     }
     .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 22px var(--ruby-dim); }
-
-    /* Hamburger — mobile only */
     .nav-ham { display:none; flex-direction:column; gap:5px; cursor:pointer; }
     .nav-ham span { display:block; width:24px; height:2px; background:var(--text1); transition:all .3s; }
 
-    /* ─────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────── */
+    /* ── HERO ── */
     #hero {
       min-height:100vh;
       padding:9rem 0 5rem;
@@ -170,20 +144,30 @@
       position:relative; overflow:hidden;
     }
 
-    /* Ambient glows */
+    /* === ADDED: hero background image === */
+    .hero-bg {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center 30%;
+      opacity:0.13;
+      z-index:0;
+      pointer-events:none;
+    }
+
     #hero::before {
       content:'';
       position:absolute; top:-300px; right:-200px;
       width:900px; height:900px;
       background:radial-gradient(circle, rgba(200,150,32,.09) 0%, transparent 65%);
-      pointer-events:none;
+      pointer-events:none; z-index:1;
     }
     #hero::after {
       content:'';
       position:absolute; bottom:-200px; left:-100px;
       width:700px; height:700px;
       background:radial-gradient(circle, rgba(214,48,48,.07) 0%, transparent 65%);
-      pointer-events:none;
+      pointer-events:none; z-index:1;
     }
 
     .hero-inner {
@@ -216,7 +200,6 @@
     }
     .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
 
-    /* Stats cards */
     .stats-grid {
       display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;
     }
@@ -237,9 +220,7 @@
       font-weight:500; margin-top:.35rem;
     }
 
-    /* ─────────────────────────────────────────
-       MARQUEE
-    ───────────────────────────────────────── */
+    /* ── MARQUEE ── */
     .marquee-wrap {
       overflow:hidden;
       background:var(--bg1);
@@ -264,9 +245,7 @@
       to   { transform:translateX(-50%); }
     }
 
-    /* ─────────────────────────────────────────
-       SHOW FEATURES
-    ───────────────────────────────────────── */
+    /* ── SHOW FEATURES ── */
     #show { padding:7rem 0; }
 
     .feat-grid {
@@ -286,14 +265,11 @@
     }
     .feat-card:hover { border-color:var(--gold-line); background:var(--bg3); transform:translateY(-5px); }
     .feat-card:hover::after { transform:scaleX(1); }
-
     .feat-icon { font-size:2rem; margin-bottom:1.2rem; }
     .feat-title { font-size:1.1rem; font-weight:700; margin-bottom:.55rem; }
     .feat-text { font-size:.92rem; color:var(--text2); line-height:1.65; }
 
-    /* ─────────────────────────────────────────
-       PORTFOLIO
-    ───────────────────────────────────────── */
+    /* ── PORTFOLIO ── */
     #portfolio { padding:7rem 0; background:var(--bg1); }
 
     .filters {
@@ -326,7 +302,6 @@
     .port-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease); }
     .port-item:hover img { transform:scale(1.08); }
 
-    /* placeholder when no image */
     .port-ph {
       width:100%; height:100%;
       display:flex; flex-direction:column;
@@ -339,8 +314,6 @@
       line-height:1.5;
     }
 
-    /* Each placeholder gets a unique gradient */
-    .port-item:nth-child(1) .port-ph { background:linear-gradient(135deg,#0f1c3a,#1a1430); }
     .port-item:nth-child(2) .port-ph { background:linear-gradient(135deg,#1a1408,#291e06); }
     .port-item:nth-child(3) .port-ph { background:linear-gradient(135deg,#0f2a1f,#0a1f30); }
     .port-item:nth-child(4) .port-ph { background:linear-gradient(135deg,#2a0f1a,#1a0a0a); }
@@ -358,11 +331,9 @@
     .port-ov-title { font-size:.95rem; font-weight:700; color:#fff; }
     .port-ov-tag { font-size:.78rem; color:var(--gold); font-weight:600; margin-top:.2rem; }
 
-    /* Span variants */
     .port-item.wide { grid-column:span 2; }
     .port-item.tall { grid-row:span 2; }
 
-    /* video overlay indicator */
     .play-badge {
       position:absolute; top:50%; left:50%;
       transform:translate(-50%,-50%);
@@ -378,9 +349,7 @@
     }
     .port-item.has-video:hover .play-badge { opacity:1; }
 
-    /* ─────────────────────────────────────────
-       ABOUT
-    ───────────────────────────────────────── */
+    /* ── ABOUT ── */
     #about { padding:7rem 0; }
 
     .about-grid {
@@ -397,10 +366,15 @@
       border:1px solid var(--border);
       background:linear-gradient(160deg, var(--bg2) 0%, var(--bg3) 100%);
       display:flex; align-items:center; justify-content:center;
-      font-size:6rem; color:rgba(255,255,255,.04);
     }
 
-    /* Gold corner accent on the photo */
+    /* === ADDED: actual image inside about-img fills the container === */
+    .about-img img {
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center top;
+    }
+
     .about-img::before {
       content:'';
       position:absolute; top:-1px; right:-1px;
@@ -435,9 +409,7 @@
       border-radius:50%; color:var(--gold); font-size:.72rem;
     }
 
-    /* ─────────────────────────────────────────
-       WHO HIRES US
-    ───────────────────────────────────────── */
+    /* ── CLIENTS ── */
     #clients { padding:7rem 0; background:var(--bg1); }
 
     .clients-grid {
@@ -453,9 +425,7 @@
     .cli-name { font-weight:700; font-size:.95rem; margin-bottom:.3rem; }
     .cli-desc { font-size:.82rem; color:var(--text3); line-height:1.5; }
 
-    /* ─────────────────────────────────────────
-       TESTIMONIALS
-    ───────────────────────────────────────── */
+    /* ── TESTIMONIALS ── */
     #testimonials { padding:7rem 0; }
 
     .testi-grid {
@@ -467,7 +437,6 @@
       transition:all .3s var(--ease);
     }
     .testi-card:hover { border-color:var(--gold-line); transform:translateY(-4px); }
-
     .testi-q {
       font-size:2.8rem; color:var(--gold); line-height:1;
       font-family:serif; opacity:.4; margin-bottom:.8rem;
@@ -487,9 +456,7 @@
     .testi-name { font-weight:700; font-size:.9rem; }
     .testi-role { font-size:.8rem; color:var(--text3); margin-top:.1rem; }
 
-    /* ─────────────────────────────────────────
-       CTA SECTION
-    ───────────────────────────────────────── */
+    /* ── CTA ── */
     #contact {
       padding:7rem 0; background:var(--bg1);
       text-align:center; position:relative; overflow:hidden;
@@ -503,13 +470,11 @@
       pointer-events:none;
     }
     .cta-inner { position:relative; z-index:2; }
-
     .cta-h2 {
       font-size:clamp(2.4rem,4.5vw,4rem);
       font-weight:900; letter-spacing:-.04em; margin-bottom:1rem;
     }
     .cta-h2 .g { color:var(--gold); }
-
     .cta-sub {
       font-size:1.1rem; color:var(--text2); max-width:520px;
       margin:0 auto 2.8rem; line-height:1.75;
@@ -518,9 +483,7 @@
       display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
     }
 
-    /* ─────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────── */
+    /* ── FOOTER ── */
     footer {
       border-top:1px solid var(--border);
       padding:2.2rem 0;
@@ -538,9 +501,7 @@
     .foot-links a:hover { color:var(--text1); }
     .foot-cr { font-size:.82rem; color:var(--text3); }
 
-    /* ─────────────────────────────────────────
-       FLOATING WA
-    ───────────────────────────────────────── */
+    /* ── FLOATING WA ── */
     .fab {
       position:fixed; bottom:1.8rem; left:1.8rem;
       width:54px; height:54px;
@@ -552,9 +513,7 @@
     }
     .fab:hover { transform:scale(1.1); box-shadow:0 8px 28px rgba(37,211,102,.55); }
 
-    /* ─────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
     @media (max-width:1024px) {
       .feat-grid { grid-template-columns:repeat(2,1fr); }
       .clients-grid { grid-template-columns:repeat(3,1fr); }
@@ -566,7 +525,6 @@
       nav { padding:1rem 1.5rem; }
       .nav-links { display:none; }
       .nav-ham { display:flex; }
-
       .hero-inner { grid-template-columns:1fr; gap:3rem; }
       .stats-grid { grid-template-columns:repeat(2,1fr); }
       .about-grid { grid-template-columns:1fr; }
@@ -586,7 +544,7 @@
 </head>
 <body>
 
-  <!-- ══════════════════════ NAV ══════════════════════ -->
+  <!-- NAV -->
   <nav id="nav">
     <div class="logo">עדן <em>ספייסי</em></div>
     <ul class="nav-links">
@@ -601,12 +559,14 @@
     </div>
   </nav>
 
-  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <!-- HERO -->
   <section id="hero">
+
+    <!-- ★ ADDED: hero background photo (opacity 0.13) -->
+    <img src="hero.png" alt="" class="hero-bg" aria-hidden="true">
+
     <div class="wrap">
       <div class="hero-inner">
-
-        <!-- copy -->
         <div class="fi" style="transition-delay:.05s">
           <div class="hero-eyebrow">מופעים מקצועיים לעיריות וארגונים</div>
           <h1 class="hero-h1">
@@ -624,7 +584,6 @@
           </div>
         </div>
 
-        <!-- stats -->
         <div class="stats-grid fi" style="transition-delay:.2s">
           <div class="stat">
             <span class="stat-n">200K+</span>
@@ -643,12 +602,11 @@
             <span class="stat-l">שנות ניסיון</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════ MARQUEE ══════════════════════ -->
+  <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee-track">
       <span class="mi">עיריות ורשויות<span></span></span>
@@ -661,7 +619,6 @@
       <span class="mi">חגיגות חגים<span></span></span>
       <span class="mi">מסר חינוכי אמיתי<span></span></span>
       <span class="mi">כוכב רשת מוכר<span></span></span>
-      <!-- duplicate for seamless loop -->
       <span class="mi">עיריות ורשויות<span></span></span>
       <span class="mi">קייטנות קיץ<span></span></span>
       <span class="mi">ועדי עובדים<span></span></span>
@@ -675,7 +632,7 @@
     </div>
   </div>
 
-  <!-- ══════════════════════ SHOW FEATURES ══════════════════════ -->
+  <!-- SHOW FEATURES -->
   <section id="show">
     <div class="wrap">
       <div class="sec-head fi">
@@ -708,7 +665,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════ PORTFOLIO ══════════════════════ -->
+  <!-- PORTFOLIO -->
   <section id="portfolio">
     <div class="wrap">
       <div class="sec-head fi">
@@ -717,7 +674,6 @@
         <p class="sub">מעל 500 אירועים מוסדיים ברחבי הארץ — הנה חלק קטן מהם.</p>
       </div>
 
-      <!-- Filters -->
       <div class="filters fi">
         <button class="f-btn on" data-f="all">הכל</button>
         <button class="f-btn" data-f="city">עיריות</button>
@@ -726,15 +682,11 @@
         <button class="f-btn" data-f="mall">קניונים</button>
       </div>
 
-      <!-- Grid -->
       <div class="port-grid fi">
 
-        <!-- 1 — wide featured -->
+        <!-- 1 — ★ ADDED: real hero.png image -->
         <div class="port-item wide" data-c="city">
-          <div class="port-ph">
-            <div class="port-ph-icon">🎪</div>
-            <div class="port-ph-label">תמונה / סרטון ממופע עירייה</div>
-          </div>
+          <img src="hero.png" alt="אירוע יום העצמאות — עיריית ראשון לציון">
           <div class="port-overlay">
             <div class="port-ov-title">אירוע יום העצמאות — עיריית ראשון לציון</div>
             <div class="port-ov-tag">עירייה • 2,000+ ילדים</div>
@@ -807,13 +759,16 @@
     </div>
   </section>
 
-  <!-- ══════════════════════ ABOUT ══════════════════════ -->
+  <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
       <div class="about-grid">
 
         <div class="about-vis fi">
-          <div class="about-img">🎤</div>
+          <!-- ★ ADDED: real about.png portrait -->
+          <div class="about-img">
+            <img src="about.png" alt="עדן ספייסי">
+          </div>
           <div class="about-badge">
             <big>10</big>
             <small>שנות ניסיון</small>
@@ -830,7 +785,7 @@
             <li>1,000+ אירועים — ניסיון שנראה על הבמה</li>
             <li>מסר של העצמה: "מילד שקוף לילד מוביל"</li>
             <li>הפקה מלאה — תפאורה, מוזיקה, תאורה וצוות</li>
-            <li>מתאים לכל המשפחה  </li>
+            <li>מתאים לכל המשפחה</li>
           </ul>
           <a href="#contact" class="btn btn-gold">← לפרטים ותיאום</a>
         </div>
@@ -839,7 +794,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════ WHO WE WORK WITH ══════════════════════ -->
+  <!-- CLIENTS -->
   <section id="clients">
     <div class="wrap">
       <div class="sec-head fi" style="text-align:center">
@@ -876,7 +831,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════ TESTIMONIALS ══════════════════════ -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials">
     <div class="wrap">
       <div class="sec-head fi">
@@ -884,7 +839,6 @@
         <h2 class="h2" style="margin-top:1rem">מה אומרים <span class="g">הלקוחות</span>?</h2>
       </div>
       <div class="testi-grid">
-
         <div class="testi-card fi">
           <div class="testi-q">"</div>
           <p class="testi-text">עדן הגיע לאירוע יום העצמאות שלנו ועשה עבודה מדהימה. הילדים היו ממש מוקסמים — הכירו אותו מטיקטוק וקיבלו אותו כמו כוכב רוק. ממליצה בחום לכל עירייה.</p>
@@ -897,7 +851,6 @@
             </div>
           </div>
         </div>
-
         <div class="testi-card fi" style="transition-delay:.12s">
           <div class="testi-q">"</div>
           <p class="testi-text">ביום המשפחות שלנו הזמנו את עדן ולא הצטערנו לרגע. הילדים לא הורידו ידיים כל המופע, וההורים גם כן נהנו. מקצועיות מהשורה הראשונה.</p>
@@ -910,7 +863,6 @@
             </div>
           </div>
         </div>
-
         <div class="testi-card fi" style="transition-delay:.24s">
           <div class="testi-q">"</div>
           <p class="testi-text">מופע הסיום של הקייטנה עם עדן היה נקודת השיא של הקיץ. 400 ילדים על הרגליים, שרים ורוקדים כל המופע. כבר קיבלנו תאריך לשנה הבאה.</p>
@@ -923,12 +875,11 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════ CTA ══════════════════════ -->
+  <!-- CTA -->
   <section id="contact">
     <div class="wrap">
       <div class="cta-inner fi">
@@ -946,7 +897,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <!-- FOOTER -->
   <footer>
     <div class="wrap">
       <div class="foot-inner">
@@ -957,30 +908,26 @@
           <li><a href="#testimonials">המלצות</a></li>
           <li><a href="https://www.spicybday.com" target="_blank">spicybday.com</a></li>
         </ul>
-        <div class="foot-cr">©  2026 עדן ספייסי - כל הזכויות שמורות.
-</div>
+        <div class="foot-cr">© 2026 עדן ספייסי - כל הזכויות שמורות.</div>
       </div>
     </div>
   </footer>
 
-  <!-- ══════════════════════ FLOATING WA ══════════════════════ -->
+  <!-- FLOATING WA -->
   <a href="https://wa.me/972505559819" class="fab" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 
-  <!-- ══════════════════════ JS ══════════════════════ -->
+  <!-- JS -->
   <script>
-    // ── Nav scroll state ──
     const nav = document.getElementById('nav');
     addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60), {passive:true});
 
-    // ── Scroll-reveal ──
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
     }, {threshold:.1});
     document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-    // ── Portfolio filter ──
     const fbns = document.querySelectorAll('.f-btn');
     const pitems = document.querySelectorAll('.port-item');
     fbns.forEach(btn => {
@@ -995,7 +942,6 @@
       });
     });
 
-    // ── Mobile nav (basic toggle) ──
     document.getElementById('ham').addEventListener('click', () => {
       const links = document.querySelector('.nav-links');
       const open = links.style.display === 'flex';
